@@ -5,6 +5,7 @@
 
 # Importando depêndencias
 import cv2
+import sys
 
 # Depois de alguns testes, a cor media das moedas é essa (Variando um pouco)
 dados_cores = {5:(111, 149, 194), 10:(90, 146, 178), 25:(116, 152, 169), 50:(71, 73, 72), 100:(68, 82, 89)}
@@ -67,7 +68,8 @@ def encontrar_valor(moedas):
                 valor_total = valor_total + int(valor)
                 contador_moedas += 1 
                 #print(f"Moeda de {int(valor)} encontrada!")   
-    print(f"Numero de moedas: {contador_moedas}\nValor total: R${valor_total/100} reais.")
+    #print(f"Numero de moedas: {contador_moedas}\nValor total: R${valor_total/100} reais.")
+    print(f"{valor_total/100}")
 
 # Calcula a cor media de uma moeda
 def calcular_cor_media(imagem, moeda):
@@ -87,9 +89,9 @@ def calcular_cor_media(imagem, moeda):
 
 if __name__ == '__main__':
     # Lendo a imagem
-    num_teste = 8
-
-    filename = f"teste{num_teste}.png"
+    #num_teste = 8
+    #filename = f"teste{num_teste}.png"
+    filename = sys.argv[1]
     img = cv2.imread(filename) # Imagem colorida
     gray_image = cv2.imread(filename,0) # Imagem cinza
     altura, largura, canais = img.shape
@@ -107,7 +109,7 @@ if __name__ == '__main__':
     encontrar_valor(moedas)
 
     #cv2.imshow("Original image", img)
-    cv2.imshow("Binary image", imbw)
+    #cv2.imshow("Binary image", imbw)
     #cv2.imshow("Gray image", gray_image)
 
     cv2.waitKey(0)

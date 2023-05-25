@@ -34,7 +34,14 @@ Instale o OpenCV e execute o arquivo contador.py.
 Para usar <contador.py>, siga estas etapas:
 
 ```
-Ao executar o contador.py, certifique-se de que ele se encontra na mesma pasta das imagens teste.
+contador.py 1
+contador.py 2
+contador.py 3
+contador.py 4
+contador.py 5
+contador.py 6
+contador.py 7
+contador.py 8
 ```
 
 

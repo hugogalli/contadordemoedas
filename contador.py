@@ -6,12 +6,16 @@
 # Importando depêndencias
 import cv2
 import sys
+import numpy as np
 
 # Depois de alguns testes, a cor media das moedas é essa (Variando um pouco)
 dados_cores = {5:(111, 149, 194), 10:(90, 146, 178), 25:(116, 152, 169), 50:(71, 73, 72), 100:(68, 82, 89)}
 
 # Passando a imagem para binario
-def to_binario(gray_image, cor_fundo):
+def to_binario(gray_image):
+    unique_values, counts = np.unique(gray_image, return_counts=True)
+    mode_index = np.argmax(counts)
+    cor_fundo = unique_values[mode_index]
     imbw = gray_image.copy()
     for i in range(altura):
         for j in range(largura):
@@ -25,7 +29,6 @@ def diferenca_cor(cor1, cor2):
 # Função que conta as moedas da foto e armazena os pixels em um vetor
 def contador(image):
     moedas = list()
-    contador_moedas = 0
     visitados = set()
     # Percorrer a imagem
     for y in range(altura):
@@ -61,13 +64,13 @@ def encontrar_valor(moedas):
     valor_total = 0.0
     contador_moedas = 0
     for moeda in moedas:
-        achou = False
         cor_moeda = calcular_cor_media(img, moeda)
         for valor, cor_padrao in dados_cores.items():
-            if diferenca_cor(cor_padrao, cor_moeda) < 20:
+            if diferenca_cor(cor_padrao, cor_moeda) < 25:
                 valor_total = valor_total + int(valor)
                 contador_moedas += 1 
                 #print(f"Moeda de {int(valor)} encontrada!")   
+                break
     #print(f"Numero de moedas: {contador_moedas}\nValor total: R${valor_total/100} reais.")
     print(f"{valor_total/100}")
 
@@ -95,17 +98,20 @@ if __name__ == '__main__':
     img = cv2.imread(filename) # Imagem colorida
     gray_image = cv2.imread(filename,0) # Imagem cinza
     altura, largura, canais = img.shape
-    cor_fundo = gray_image[0,0] # Cor do fundo (cinza)
 
     # Passando imagem pra binario
-    imbw = to_binario(gray_image, cor_fundo)  # Imagem binária
-    moedas = contador(imbw) # Pixels contendo as moedas em forma de set
+    imbw = to_binario(gray_image)  # Imagem binária
+
+    kernel = np.ones((3,3), np.uint8)
+    imbw_opened = cv2.morphologyEx(imbw, cv2.MORPH_OPEN, kernel) # Imagem binaria com abertura (remover a linha da imagem 5 por exemplo)
 
     # Identifica as moedas e contabiliza
+    moedas = contador(imbw_opened) # Pixels contendo as moedas em forma de set
     encontrar_valor(moedas)
 
-    #cv2.imshow("Original image", img)
-    #cv2.imshow("Binary image", imbw)
-    #cv2.imshow("Gray image", gray_image)
+    #cv2.imshow("Imagem original", img)
+    #cv2.imshow("Imagem em tons de cinza", gray_image)
+    #cv2.imshow("Imagem binaria", imbw)
+    #cv2.imshow("Imagem binaria apos a abertura", imbw_opened)
 
     cv2.waitKey(0)

@@ -32,18 +32,12 @@ Instale o OpenCV e execute o arquivo contador.py.
 ## ☕ Usando
 
 Para usar <contador.py>, siga estas etapas:
-
+Use o seguinte comando no terminal
 ```
-contador.py 1
-contador.py 2
-contador.py 3
-contador.py 4
-contador.py 5
-contador.py 6
-contador.py 7
-contador.py 8
+python3 contador.py "teste1.png"
+  
 ```
-
+Adapte o comando para o nome da imagem a ser testada.
 
 ## 📫 Contribuindo
 Para contribuir com o projeto, siga estas etapas:

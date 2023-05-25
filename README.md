@@ -1,16 +1,16 @@
 # Contador de Moedas
 
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
+> Utilizando apenas algoritmos basicos, o programa tem como intuito contar o valor de cada moeda da imagem manualmente, apenas observando os pixels da imagem.
 
 ### Ajustes e melhorias
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+- [x] Criando mascaras de segmentação das moedas
+- [x] Contando numero de moedas
+- [x] Contando valor das moedas
+- [ ] Desenhando o contorno das moedas
+- [ ] Acelerar o processo
 
 ## 💻 Pré-requisitos
 

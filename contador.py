@@ -95,10 +95,6 @@ if __name__ == '__main__':
     img = cv2.imread(filename) # Imagem colorida
     gray_image = cv2.imread(filename,0) # Imagem cinza
     altura, largura, canais = img.shape
-
-    # Ajuste de contraste
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-    gray_image = clahe.apply(gray_image)
     cor_fundo = gray_image[0,0] # Cor do fundo (cinza)
 
     # Passando imagem pra binario
